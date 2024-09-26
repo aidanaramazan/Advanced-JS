@@ -1,0 +1,25 @@
+
+const sayHello = () => {
+     console.log('hello')
+};
+
+setTimeout(sayHello, 5000)
+
+const timeout1 = setTimeout(function(){
+     console.log('timeout 1');
+
+     setTimeout(function(){
+         console.log('timeout 2')
+     }, 500)
+
+}, 1000);
+
+
+const timerId = setInterval(function(){
+     alert('Two seconds!!!!')
+}, 2000)
+
+setTimeout(()=>{
+     clearInterval(timerId);
+     alert('Timer stopped');
+ }, 10000)
