@@ -23,3 +23,149 @@ setTimeout(()=>{
      clearInterval(timerId);
      alert('Timer stopped');
  }, 10000)
+
+
+//callbacks
+
+function first(){
+    setTimeout(()=>{
+        alert('!!!')
+        console.log('ffirst')
+    }, 1000)
+}
+
+function second(){
+    console.log('second');
+}
+
+first();
+second();
+
+function learn(lesson, callback){
+    setTimeout(()=>{
+        console.log(`Сегодня мы проходим ${lesson}`)
+        callback();
+    },1000)
+}
+
+function iLikeIt(){
+    console.log('И мне это нравится!')
+}
+
+const name = '';
+learn('Callbacks!', iLikeIt);
+
+function loadScript(script){
+    console.log('loading ./script...', script)
+}
+
+loadScript('./script1.js', function(){
+    console.log('скрипт 1 загружен')
+
+    loadScript('./script1.js', function(){
+        console.log('скрипт 2 загружен')
+
+        loadScript('./script1.js', function(){
+            console.log('скрипт 3 загружен')
+
+            loadScript('./script1.js', function(){
+                console.log('скрипт 4 загружен')
+
+                loadScript('./script1.js', function(){
+                    console.log('скрипт 5 загружен')
+                })
+            })
+        })
+    })
+})
+
+console.log('1')
+let product = {}
+setTimeout(()=>{
+    console.log('Подготовка данных!');
+
+    const product = {
+        name: 'phone',
+        price: 1000
+    }
+    console.log('Данные подготовлены отправляем их на фронтенд')
+    console.log(product)
+}, 5000)
+
+alert(`Hello ${product.name}`)
+console.log('2 finished timeout')
+
+
+//promises
+
+const request = new Promise(function(resolve, reject){
+    // Загрузка с интернета
+    setTimeout(()=>{
+        console.log('Подготовка данных!');
+
+        const product = {
+            name: 'phone',
+            price: 1000
+        }
+        console.log('Данные подготовлены отправляем их на фронтенд')
+        console.log(product)
+        resolve(product)
+    }, 5000)
+})
+
+request.then(data => {
+    alert(`Hello ${data.name}`);
+
+    const request2 = new Promise(function(resolve, reject){
+        console.log('Данные подгрузить с другого сервера')
+        const error = true;
+        if(error){
+            reject()
+        }
+        product.model = 'iPhone 14PRO';
+    })
+
+    request2.then((e)=>{ console.log(e, 'Произошла некотрая ошибка! Не видать нам айфона!!!')})
+}).catch(()=>{
+    console.log('произошла ошибка')
+})
+
+test(2000).then(()=>console.log('Загрузилось на 2 секунду'))
+
+const promises = [test(1000), test(2000)];
+
+Promise.all(promises)
+    .then(()=>console.log('Все обещания выполнены!'))
+    .catch(()=>console.log('Не сработало'));
+
+//eventloops
+
+// Task for eventloop
+// console.log('начала скрипта');
+
+// setTimeout(()=>{
+//     console.log('таймаут')
+// })
+
+// const p = new Promise((resolve, reject)=>{
+//     console.log('Создание промиса');
+//     resolve()
+// })
+
+// p.then(function(){
+//     console.log('Обработка промиса');
+// })
+
+// console.log('конец скрипта');
+
+console.log(1);
+
+setTimeout(()=>console.log(2));
+
+Promise.resolve().then(()=>console.log(3));
+
+Promise.resolve().then(()=>setTimeout(()=>console.log(4)));
+
+setTimeout(()=>console.log(5))
+
+console.log(6)
